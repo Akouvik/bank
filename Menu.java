@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Menu {
   // instance variable
@@ -142,14 +143,67 @@ public class Menu {
   }
 
   public void makeADeposit() {
-
+    int account = selectAccount();
+    if (account >= 0) {
+      System.out.print("How much would you like to deposit?: ");
+      double amount = 0;
+      try {
+        amount = Double.parseDouble(keyboard.nextLine());
+      } catch (NumberFormatException e) {
+        amount = 0;
+      }
+      bank.getCustomer(account).getAccount().deposit(amount);
+    }
   }
 
   public void makeAwithdraw() {
-
+    int account = selectAccount();
+    if (account >= 0) {
+      System.out.print("How much would you like to withdraw?: ");
+      double amount = 0;
+      try {
+        amount = Double.parseDouble(keyboard.nextLine());
+      } catch (NumberFormatException e) {
+        amount = 0;
+      }
+      bank.getCustomer(account).getAccount().withdraw(amount);
+    }
   }
 
   public void listBalance() {
+    int account = selectAccount();
+    if (account >= 0) {
+      System.out.println(bank.getCustomer(account).getAccount());
+    }
+  }
 
+  private int selectAccount() {
+    ArrayList<Customer> customers = bank.getCustomers();
+    if (customers.size() <= 0) {
+      System.out.print("No customers at you bank ");
+      return -1;
+    }
+    System.out.print("Select an account choice: ");
+
+    for (int i = 0; i < customers.size(); i++) {
+      System.out.print((i + 1) + ") " + customers.get(i).basicInfo());
+    }
+
+    int account = 0;
+    System.out.print("Please enter Selection: ");
+
+    try {
+      account = Integer.parseInt(keyboard.nextLine()) - 1;
+    } catch (
+
+    NumberFormatException e) {
+      account = -1;
+    }
+    if (account < 0 || account > customers.size()) {
+      System.out.print("Invalid account selected ");
+
+      account = -1;
+    }
+    return account;
   }
 }

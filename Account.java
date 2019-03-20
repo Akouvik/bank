@@ -50,27 +50,28 @@ public class Account {
       return;
     }
     balance -= amount + 5;
-    System.out.println("you have withdrawn " + amount + "dollars and incurred a fee of $5");
+    checkInterest(0);
+    System.out.println("you have withdrawn " + amount + " dollars and incurred a fee of $5");
     System.out.println("you now have a balance of " + balance);
 
   }
 
   public void deposit(double amount) {
-    if (amount < 0) {
+    if (amount <= 0) {
       System.out.println("You cannot deposit negative money");
       return;
     }
-    checkInterest();
-    amount = amount + amount * (interest * 100);
+    checkInterest(amount);
+    amount = amount * amount * interest;
     balance += amount;
     System.out
-        .println("You have deposited $ " + amount + "dollars with an interest rate of " + (interest * 100) + "percent");
+        .println("You have deposited $" + amount + " dollars with an interest rate of " + (interest * 100) + " %");
     System.out.println("you now have a balance of $" + balance);
 
   }
 
-  public void checkInterest() {
-    if (balance > 10000) {
+  public void checkInterest(double amount) {
+    if (balance + amount > 10000) {
       interest = 0.05;
     } else {
       interest = 0.02;
