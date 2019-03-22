@@ -23,19 +23,19 @@ public class Menu {
   }
 
   private void printHeader() {
-    System.out.println("+-----------------");
-    System.out.println("!      Welcome to Akouvi's Bank        ");
-    System.out.println("!      Where your money stays save and cozy  ");
-    System.out.println("+-----------------");
+    System.out.println("+------------------------------------------");
+    System.out.println("!      Welcome to Akouvi's Bank            ");
+    System.out.println("!      Where your money stays save and cozy");
+    System.out.println("+------------------------------------------");
 
   }
 
   private void printMenu() {
     System.out.println("Please make a selection:");
-    System.out.println("1)    Create new account   ");
+    System.out.println("1)    Create a new account");
     System.out.println("2)    Make a deposit");
     System.out.println("3)    Make a widthdraw");
-    System.out.println("4)    List Accoutn balance");
+    System.out.println("4)    View Account balance");
     System.out.println("0)    exit");
 
   }
@@ -94,9 +94,9 @@ public class Menu {
     boolean valid = false;
 
     while (!valid) {
-      System.out.print("Please enter in account type(checking/saving):");
+      System.out.print("Please enter in account type(checking/savings):");
       accountType = keyboard.nextLine();
-      if (accountType.equalsIgnoreCase("checking") || accountType.equalsIgnoreCase("saving")) {
+      if (accountType.equalsIgnoreCase("checking") || accountType.equalsIgnoreCase("savings")) {
         valid = true;
       } else {
         System.out.println("Invalid account type. please enter checking or saving");
@@ -123,9 +123,9 @@ public class Menu {
         } else {
           valid = true;
         }
-      } else if (accountType.equalsIgnoreCase("saving")) {
+      } else if (accountType.equalsIgnoreCase("savings")) {
         if (initialDeposit < 50) {
-          System.out.println("Checking accounts require $50 or above to open");
+          System.out.println("Savings accounts require $50 or above to open");
         } else {
           valid = true;
         }
@@ -174,6 +174,7 @@ public class Menu {
     int account = selectAccount();
     if (account >= 0) {
       System.out.println(bank.getCustomer(account).getAccount());
+
     }
   }
 
@@ -182,11 +183,15 @@ public class Menu {
     if (customers.size() <= 0) {
       System.out.print("No customers at you bank ");
       return -1;
-    }
-    System.out.print("Select an account choice: ");
+    } else {
 
-    for (int i = 0; i < customers.size(); i++) {
-      System.out.print((i + 1) + ") " + customers.get(i).basicInfo());
+      System.out.print("Select an account choice: ");
+
+      for (int i = 0; i < customers.size(); i++) {
+        // System.out.println("What is this?" + customers.get(i));
+        System.out.print((i + 1) + ") " + customers.get(i).basicInfo() + "\n");
+
+      }
     }
 
     int account = 0;

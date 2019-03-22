@@ -19,7 +19,7 @@ public class Customer {
   }
 
   public String basicInfo() {
-    return "First Name " + firstName + " Last Name " + lastName + " ssn " + ssn + " account " + account;
+    return "First Name: " + firstName + " Last Name: " + lastName;
   }
 
   Account getAccount() {
